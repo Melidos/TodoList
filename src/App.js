@@ -1,13 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import Todos from './components/Todos.js';
 
-import Container from 'react-bootstrap/Container';
+export default class App extends Component {
+  state = {
+    todos: [
+        {
+            id: 1,
+            title: "Take out the trash",
+            completed: false,
+        },
+        {
+            id: 2,
+            title: "Dinner with wife",
+            completed: false,
+        },
+        {
+            id: 3,
+            title: "Metting with boss",
+            completed: false,
+        }
+    ]
+  }
+ 
+  markComplete = (id) => {
+    this.setState({ todos: this.state.todos.map(todo => {
+      if (todo.id === id) {
+        todo.completed = !todo.completed;
+      }
+      return todo;
+    })})
+  }
 
-function App() {
-  return (
-    null
-  );
+  removeTodo = (id) => {
+    this.setState({ todos: this.state.todos.filter(todo => todo.id !== id)});
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <Todos
+          todos={this.state.todos}
+          markComplete={ this.markComplete }
+          removeTodo={ this.removeTodo }
+        />
+      </div>
+    )
+  }
 }
-
-export default App;
