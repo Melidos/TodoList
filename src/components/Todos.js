@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class Todos extends Component {
     render() {
-        return this.props.todos.map(todo => (
+        return this.props.todos.sort( (b, a) => b.completed - a.completed ).map(todo => (
             <TodoItem
                 key={ todo.id }
                 todo={ todo }

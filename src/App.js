@@ -2,22 +2,23 @@ import React, { Component } from 'react'
 import './App.css';
 import Todos from './components/Todos.js';
 import AddTodo from './components/AddTodo.js';
+import { uuid } from 'uuidv4';
 
 export default class App extends Component {
   state = {
     todos: [
         {
-            id: 1,
+            id: uuid(),
             title: "Take out the trash",
-            completed: false,
+            completed: true,
         },
         {
-            id: 2,
+            id: uuid(),
             title: "Dinner with wife",
             completed: false,
         },
         {
-            id: 3,
+            id: uuid(),
             title: "Metting with boss",
             completed: false,
         }
@@ -42,7 +43,7 @@ export default class App extends Component {
       { todos:
         [...this.state.todos, {
           title: title,
-          id: this.state.todos.reduce( (a, b) => a.id > b.id ? a.id : b.id ) + 1,
+          id: uuid(),
           completed: false
         }]
       }
@@ -52,9 +53,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddTodo
-          addTodo={ this.addTodo }
-        />
         <div className='AppContainer'>
           <Todos
             todos={this.state.todos}
@@ -62,6 +60,9 @@ export default class App extends Component {
             removeTodo={ this.removeTodo }
           />
         </div>
+        <AddTodo
+          addTodo={ this.addTodo }
+        />
       </div>
     )
   }

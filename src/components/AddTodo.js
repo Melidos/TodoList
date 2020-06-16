@@ -18,7 +18,7 @@ export default class AddTodo extends Component {
                 <input
                     type="text"
                     id="inputText"
-                    placeholder="Add your todo"
+                    placeholder="Add new todo"
                     value={ this.state.title }
                     onChange={ (e) => this.setState({ title: e.target.value })}
                 />

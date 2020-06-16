@@ -13,12 +13,19 @@
 }
 
 .addForm {
+  display: flex;
   border: 1px solid grey;
   text-align: center;
-  padding: 20px;
+  padding: 5%;
+  width: 89%;
+}
+
+.addForm input[type=text] {
+  width: 100%;
 }
 
 .btnRemove {
+  flex: 1;
   float: right;
   padding: 5px;
   border-radius: 10%;
