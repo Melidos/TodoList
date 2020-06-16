@@ -1,49 +1,49 @@
-.App {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
+body {
+  margin: 0;
+  padding: 0;
 }
-@media screen and (max-width: 1024px) {
+
+.App {
+  width: 50%;
+  margin: 0 auto;
+  height: 100%;
+}
+@media screen and (max-width: 1500px) {
   .App {
-    left: 0;
-    top: 0;
-    transform: none;
     width: 100%;
-    height: 100%;
   }
 }
 
 .AppContainer {
-  border: 1px solid black;
-  min-width: 300px;
-  min-height: 500px;
-  padding: 20px;
+  padding-top: 50px;
 }
 .AppContainer input[type=checkbox] {
   cursor: pointer;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1500px) {
   .AppContainer {
-    border: none;
+    padding-top: 0;
+    padding-bottom: 50px;
   }
 }
 
 .addForm {
   display: flex;
-  border: 1px solid grey;
+  position: fixed;
+  padding: 1% 0;
   text-align: center;
-  padding: 5%;
-  width: 89%;
+  background-color: white;
+  width: 50%;
 }
 .addForm input[type=text] {
   width: 100%;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1500px) {
   .addForm {
-    position: absolute;
+    left: 0;
     bottom: 0;
-    width: 90%;
+    padding: 1%;
+    width: 98%;
   }
 }
 

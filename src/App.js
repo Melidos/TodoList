@@ -8,19 +8,94 @@ export default class App extends Component {
   state = {
     todos: [
         {
-            id: uuid(),
-            title: "Take out the trash",
-            completed: true,
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
         },
         {
-            id: uuid(),
-            title: "Dinner with wife",
-            completed: false,
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
         },
         {
-            id: uuid(),
-            title: "Metting with boss",
-            completed: false,
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
+        },
+        {
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
+        },
+        {
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
+        },
+        {
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
+        },
+        {
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Take out the trash",
+          completed: true,
+        },
+        {
+          id: uuid(),
+          title: "Dinner with wife",
+          completed: false,
+        },
+        {
+          id: uuid(),
+          title: "Metting with boss",
+          completed: false,
         }
     ]
   }
@@ -53,6 +128,9 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <AddTodo
+          addTodo={ this.addTodo }
+        />
         <div className='AppContainer'>
           <Todos
             todos={this.state.todos}
@@ -60,9 +138,6 @@ export default class App extends Component {
             removeTodo={ this.removeTodo }
           />
         </div>
-        <AddTodo
-          addTodo={ this.addTodo }
-        />
       </div>
     )
   }
