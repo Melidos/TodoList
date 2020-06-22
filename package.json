@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "client": "cd client && npm start",
-    "client-build": "cd client && react-scripts build",
+    "client-build": "cd client && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "concurrently \"npm run client-build\" \"npm run server\""
   },
