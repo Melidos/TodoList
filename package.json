@@ -4,7 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "client-build": "cd client && react-scripts build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run client-build\" \"npm run server\""
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,8 @@
   },
   "dependencies": {
     "concurrently": "^5.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.19"
   }
 }
