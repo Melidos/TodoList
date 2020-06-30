@@ -1,58 +1,17 @@
-$break: 1500px;
-$widthFullScreen: 50%;
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-.App {
-    width: $widthFullScreen;
-    margin: 0 auto;
-    height: 100%;
-    @media screen and (max-width: $break) {
-        width: 100%;
-    }
-  }
-  
-.AppContainer {
-    padding-top: 50px;
-    & input[type=checkbox] {
-        cursor: pointer;
-    }
-    @media screen and (max-width: $break) {
-        padding-top: 0;
-        padding-bottom: 50px;
-    }
-}
-
 .addForm {
-    display: flex;
-    position: fixed;
-    padding: 1% 0;
-    text-align: center;
-    background-color: white;
-    width: $widthFullScreen;
-    & input[type=text] {
-        width: 100%;
-    }
-    @media screen and (max-width: $break) {
-        left: 0;
-        bottom: 0;
-        padding: 1%;
-        width: 98%;
-    }
+	@media (max-width: 1280px) {
+		position: fixed;
+		bottom: 5px;
+		width: 95%;
+		display: block;
+		background-color: white;
+		z-index: 10;
+		pointer-events: all;
+	}
 }
 
-.btnRemove {
-    flex: 1;
-    float: right;
-    padding: 5px;
-    border-radius: 10%;
-    cursor: pointer;
-    &:hover {
-        background: #ed7979;
-        color: white;
-        border: 1px solid rgb(186, 186, 186)
-    }
+table {
+	@media (max-width: 1280px) {
+		margin-bottom: 75px;
+	}
 }

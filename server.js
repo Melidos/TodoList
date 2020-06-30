@@ -7,6 +7,8 @@ const axios = require('axios');
 const port = process.env.PORT || 5000;
 
 const todos = require('./routes/api/todos.js');
+const login = require('./routes/login');
+const register = require('./routes/register');
 
 app.use(express.json());
 
@@ -26,6 +28,8 @@ mongoose.connect(
 
 //Routes
 app.use("/api/todos", todos);
+app.use("/login", login);
+app.use("/register", register);
 //Fin Routes
 
 if (process.env.NODE_ENV === "production") {

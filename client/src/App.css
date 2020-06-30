@@ -1,63 +1,19 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  width: 50%;
-  margin: 0 auto;
-  height: 100%;
-}
-@media screen and (max-width: 1500px) {
-  .App {
-    width: 100%;
-  }
-}
-
-.AppContainer {
-  padding-top: 50px;
-}
-.AppContainer input[type=checkbox] {
-  cursor: pointer;
-}
-@media screen and (max-width: 1500px) {
-  .AppContainer {
-    padding-top: 0;
-    padding-bottom: 50px;
-  }
-}
-
-.addForm {
-  display: flex;
-  position: fixed;
-  padding: 1% 0;
-  text-align: center;
-  background-color: white;
-  width: 50%;
-}
-.addForm input[type=text] {
-  width: 100%;
-}
-@media screen and (max-width: 1500px) {
+@media (max-width: 1280px) {
   .addForm {
-    left: 0;
-    bottom: 0;
-    padding: 1%;
-    width: 98%;
+    position: fixed;
+    bottom: 5px;
+    width: 95%;
+    display: block;
+    background-color: white;
+    z-index: 10;
+    pointer-events: all;
   }
 }
 
-.btnRemove {
-  flex: 1;
-  float: right;
-  padding: 5px;
-  border-radius: 10%;
-  cursor: pointer;
-}
-.btnRemove:hover {
-  background: #ed7979;
-  color: white;
-  border: 1px solid #bababa;
+@media (max-width: 1280px) {
+  table {
+    margin-bottom: 75px;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */
