@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { TextField, Button, Box } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 export default class AddTodo extends Component {
 	state = {
@@ -17,17 +17,15 @@ export default class AddTodo extends Component {
 					this.setState({ name: '' });
 				}}
 			>
-				<Box flexDirection='row'>
-					<TextField
-						variant={window.innerWidth > 1280 ? 'standard' : 'outlined'}
-						fullWidth='true'
-						type='text'
-						id='inputText'
-						placeholder='Add new todo'
-						value={this.state.name}
-						onChange={(e) => this.setState({ name: e.target.value })}
-					/>
-				</Box>
+				<TextField
+					variant={window.innerWidth > 1280 ? 'standard' : 'outlined'}
+					fullWidth={true}
+					type='text'
+					id='inputText'
+					placeholder='Add new todo'
+					value={this.state.name}
+					onChange={(e) => this.setState({ name: e.target.value })}
+				/>
 			</form>
 		);
 	}

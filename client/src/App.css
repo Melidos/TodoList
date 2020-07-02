@@ -9,6 +9,26 @@
     pointer-events: all;
   }
 }
+@media (max-width: 1050px) {
+  .addForm {
+    width: 93.5%;
+  }
+}
+@media (max-width: 740px) {
+  .addForm {
+    width: 91%;
+  }
+}
+@media (max-width: 450px) {
+  .addForm {
+    width: 88%;
+  }
+}
+@media (max-width: 360px) {
+  .addForm {
+    width: 87%;
+  }
+}
 
 @media (max-width: 1280px) {
   table {

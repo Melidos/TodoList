@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Todos from './components/Todos.js';
 import AddTodo from './components/AddTodo.js';
+import DrawerMenu from './components/DrawerMenu.js';
 import axios from 'axios';
-import Media from 'react-media';
 
 import { Container } from '@material-ui/core';
 
@@ -70,6 +70,7 @@ export default class App extends Component {
 	render() {
 		return (
 			<Container>
+				<DrawerMenu />
 				<AddTodo addTodo={this.addTodo} />
 				<Todos todos={this.state.todos} markComplete={this.markComplete} removeTodo={this.removeTodo} />
 			</Container>
