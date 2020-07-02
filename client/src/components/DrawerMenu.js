@@ -6,12 +6,11 @@ import Axios from 'axios';
 
 export default class DrawerMenu extends Component {
 	state = {
-		drawer              : false,
-		username            : '',
-		password            : '',
-		action              : '',
-		registrationSuccess : false,
-		registrationFailed  : false
+		drawer       : false,
+		username     : '',
+		password     : '',
+		action       : '',
+		registration : false
 	};
 
 	render() {
@@ -35,10 +34,13 @@ export default class DrawerMenu extends Component {
 									password : this.state.password
 								})
 									.then((_) => {
-										this.setState({ registrationSuccess: true });
-										setTimeout((_) => this.setState({ registrationSuccess: false }), 3000);
+										this.setState({ registration: 'success' });
+										setTimeout((_) => this.setState({ registration: false }), 3000);
 									})
-									.catch((err) => console.log('Registration error: ' + err));
+									.catch((err) => {
+										this.setState({ registration: 'error' });
+										setTimeout((_) => this.setState({ registration: false }), 3000);
+									});
 							}
 							else if (this.state.action === 'login') {
 								//login
@@ -72,11 +74,14 @@ export default class DrawerMenu extends Component {
 									Login
 								</Button>
 							</ButtonGroup>
-							<Fade in={this.state.registrationSuccess}>
-								<Alert severity='success'>Registration complete</Alert>
-							</Fade>
-							<Fade in={this.state.registrationFailed}>
-								<Alert severity='error'>Registration failed</Alert>
+							<Fade in={this.state.registration}>
+								<Alert severity={this.state.registration === false ? 'error' : this.state.registration}>
+									{this.state.registration === 'success' ? (
+										'Registration complete'
+									) : (
+										'Registration failed'
+									)}
+								</Alert>
 							</Fade>
 						</Container>
 					</form>
