@@ -34,9 +34,6 @@ export default class App extends Component {
 		const csvData =
 			',completed,name\n' +
 			this.state.todos.map((el) => el.completed + ',"' + el.name.replace(/"/gi, "'") + '"').join('\n');
-		//const csvData = this.state.todos.join(',');
-		console.log(csvData);
-		//const csvData = ',completed,description\n' + this.state.todos.map((el) => el.completed + ',' + el.name + '\n');
 
 		const he = document.createElement('a');
 		he.href = 'data:text/csv' + encodeURI(csvData);
