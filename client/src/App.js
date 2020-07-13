@@ -30,6 +30,20 @@ export default class App extends Component {
 		});
 	}
 
+	exportToCSV = () => {
+		const csvData =
+			',completed,name\n' +
+			this.state.todos.map((el) => el.completed + ',"' + el.name.replace(/"/gi, "'") + '"').join('\n');
+		//const csvData = this.state.todos.join(',');
+		console.log(csvData);
+		//const csvData = ',completed,description\n' + this.state.todos.map((el) => el.completed + ',' + el.name + '\n');
+
+		const he = document.createElement('a');
+		he.href = 'data:text/csv' + encodeURI(csvData);
+		he.download = 'file.csv';
+		he.click();
+	};
+
 	markComplete = (id) => {
 		axios
 			.put('/api/todos/' + id)
@@ -79,7 +93,7 @@ export default class App extends Component {
 	render() {
 		return (
 			<Container>
-				<Header addTodo={this.addTodo} userLogged={this.state.userLogged} />
+				<Header addTodo={this.addTodo} userLogged={this.state.userLogged} exportToCSV={this.exportToCSV} />
 				<Todos todos={this.state.todos} markComplete={this.markComplete} removeTodo={this.removeTodo} />
 			</Container>
 		);

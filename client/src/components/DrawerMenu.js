@@ -48,6 +48,10 @@ export default class DrawerMenu extends Component {
 								Log Out
 							</Button>
 						</form>
+						<ButtonGroup color='primary' fullWidth={true} style={{ marginTop: '10px' }}>
+							<Button onClick={this.props.exportToCSV}>Export</Button>
+							<Button onClick={(_) => null}>Import</Button>
+						</ButtonGroup>
 					</Container>
 				</Drawer>
 			</React.Fragment>
