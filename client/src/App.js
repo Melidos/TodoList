@@ -14,14 +14,20 @@ export default class App extends Component {
 	};
 
 	componentDidMount() {
-		axios
-			.get('/api/todos')
-			.then((res) => {
-				this.setState({ todos: res.data });
-			})
-			.catch((err) => console.log('Error in App.js: ' + err));
-
-		axios.get('/api/login/isLoggedIn').then((user) => this.setState({ userLogged: user.data }));
+		axios.get('/api/login/isLoggedIn').then((user) => this.setState({ userLogged: user.data })).then((_) => {
+			if (this.state.userLogged) {
+				console.log(this.state.userLogged + ' connected');
+				axios
+					.post('/api/todos/getTodos', { user: this.state.userLogged })
+					.then((res) => {
+						this.setState({ todos: res.data });
+					})
+					.catch((err) => console.log('Error in App.js: ' + err));
+			}
+			else {
+				console.log('User not connected');
+			}
+		});
 	}
 
 	markComplete = (id) => {
@@ -58,7 +64,7 @@ export default class App extends Component {
 
 	addTodo = (name) => {
 		axios
-			.post('/api/todos', { name })
+			.post('/api/todos', { name, user: this.state.userLogged })
 			.then((todo) =>
 				this.setState({
 					todos : [

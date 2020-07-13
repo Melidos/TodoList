@@ -36,6 +36,7 @@ export default class DrawerMenu extends Component {
 							onSubmit={(e) => {
 								e.preventDefault();
 								Axios.get('/api/login/disconnect').then((_) => this.setState({ userLogged: null }));
+								window.location.reload();
 							}}
 						>
 							<Button
@@ -85,7 +86,7 @@ export default class DrawerMenu extends Component {
 									username : this.state.username,
 									password : this.state.password
 								})
-									.then((user) => this.setState({ userLogged: user.data.username }))
+									.then((_) => window.location.reload())
 									.catch((err) => console.log('Connection error: ' + err));
 							}
 						}}
