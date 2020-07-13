@@ -11,6 +11,7 @@ export default class AddTodo extends Component {
 		return (
 			<form
 				className='addForm'
+				style={{ display: 'inline-block', width: '100%' }}
 				onSubmit={(e) => {
 					e.preventDefault();
 					this.props.addTodo(this.state.name);
@@ -18,7 +19,7 @@ export default class AddTodo extends Component {
 				}}
 			>
 				<TextField
-					variant={window.innerWidth > 1280 ? 'standard' : 'outlined'}
+					variant={window.innerWidth > 1280 ? 'standard' : 'standard'}
 					fullWidth={true}
 					type='text'
 					id='inputText'

@@ -3,13 +3,18 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const axios = require('axios');
+const bodyParser = require('body-parser');
+
+const cookieParser = require('cookie-parser');
 
 const port = process.env.PORT || 5000;
 
 const todos = require('./routes/api/todos.js');
 const login = require('./routes/api/login.js');
 
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
 

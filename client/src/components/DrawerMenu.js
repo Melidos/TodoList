@@ -6,20 +6,57 @@ import Axios from 'axios';
 
 export default class DrawerMenu extends Component {
 	state = {
-		drawer       : false,
-		username     : '',
-		password     : '',
-		action       : '',
-		registration : false
+		drawer            : false,
+		username          : '',
+		password          : '',
+		action            : '',
+		registration      : false,
+		registrationState : null,
+		userLogged        : null
 	};
 
-	render() {
+	componentDidMount() {
+		setTimeout((_) => this.setState({ userLogged: this.props.userLogged }), 1000);
+	}
+
+	renderLogged() {
 		return (
 			<React.Fragment>
-				<Button
-					onClick={() => this.setState({ drawer: true })}
-					style={{ position: 'fixed', top: '0', left: '-10px' }}
-				>
+				<Button onClick={() => this.setState({ drawer: true })}>
+					<svg style={{ width: '24px', height: '24px' }} viewBox='0 0 24 24'>
+						<path fill='currentColor' d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z' />
+					</svg>
+				</Button>
+				<Drawer anchor='left' open={this.state.drawer} onClose={() => this.setState({ drawer: false })}>
+					<Container
+						style={{ width: '300px', paddingTop: '10px', paddingBottom: '10px', textAlign: 'center' }}
+					>
+						Logged in as {this.state.userLogged}
+						<form
+							onSubmit={(e) => {
+								e.preventDefault();
+								Axios.get('/api/login/disconnect').then((_) => this.setState({ userLogged: null }));
+							}}
+						>
+							<Button
+								variant='outlined'
+								color='primary'
+								style={{ display: 'block', margin: '10px auto 0' }}
+								type='submit'
+							>
+								Log Out
+							</Button>
+						</form>
+					</Container>
+				</Drawer>
+			</React.Fragment>
+		);
+	}
+
+	renderNotLogged() {
+		return (
+			<React.Fragment>
+				<Button onClick={() => this.setState({ drawer: true })}>
 					<svg style={{ width: '24px', height: '24px' }} viewBox='0 0 24 24'>
 						<path fill='currentColor' d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z' />
 					</svg>
@@ -29,21 +66,27 @@ export default class DrawerMenu extends Component {
 						onSubmit={(e) => {
 							if (this.state.action === 'register') {
 								e.preventDefault();
-								Axios.post('/api/login', {
+								Axios.post('/api/login/register', {
 									username : this.state.username,
 									password : this.state.password
 								})
 									.then((_) => {
-										this.setState({ registration: 'success' });
+										this.setState({ registration: true, registrationState: 'success' });
 										setTimeout((_) => this.setState({ registration: false }), 3000);
 									})
 									.catch((err) => {
-										this.setState({ registration: 'error' });
+										this.setState({ registration: true, registrationState: 'error' });
 										setTimeout((_) => this.setState({ registration: false }), 3000);
 									});
 							}
 							else if (this.state.action === 'login') {
-								//login
+								e.preventDefault();
+								Axios.post('/api/login/login', {
+									username : this.state.username,
+									password : this.state.password
+								})
+									.then((user) => this.setState({ userLogged: user.data.username }))
+									.catch((err) => console.log('Connection error: ' + err));
 							}
 						}}
 					>
@@ -75,8 +118,12 @@ export default class DrawerMenu extends Component {
 								</Button>
 							</ButtonGroup>
 							<Fade in={this.state.registration}>
-								<Alert severity={this.state.registration === false ? 'error' : this.state.registration}>
-									{this.state.registration === 'success' ? (
+								<Alert
+									severity={
+										this.state.registrationState === null ? 'error' : this.state.registrationState
+									}
+								>
+									{this.state.registrationState === 'success' ? (
 										'Registration complete'
 									) : (
 										'Registration failed'
@@ -88,5 +135,9 @@ export default class DrawerMenu extends Component {
 				</Drawer>
 			</React.Fragment>
 		);
+	}
+
+	render() {
+		return this.state.userLogged ? this.renderLogged() : this.renderNotLogged();
 	}
 }

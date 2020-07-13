@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
 import Todos from './components/Todos.js';
-import AddTodo from './components/AddTodo.js';
-import DrawerMenu from './components/DrawerMenu.js';
+import Header from './components/Header.js';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { Container } from '@material-ui/core';
 
 export default class App extends Component {
 	state = {
-		todos : []
+		todos      : [],
+		userLogged : null
 	};
 
 	componentDidMount() {
@@ -19,6 +20,8 @@ export default class App extends Component {
 				this.setState({ todos: res.data });
 			})
 			.catch((err) => console.log('Error in App.js: ' + err));
+
+		axios.get('/api/login/isLoggedIn').then((user) => this.setState({ userLogged: user.data }));
 	}
 
 	markComplete = (id) => {
@@ -70,8 +73,7 @@ export default class App extends Component {
 	render() {
 		return (
 			<Container>
-				<DrawerMenu />
-				<AddTodo addTodo={this.addTodo} />
+				<Header addTodo={this.addTodo} userLogged={this.state.userLogged} />
 				<Todos todos={this.state.todos} markComplete={this.markComplete} removeTodo={this.removeTodo} />
 			</Container>
 		);
