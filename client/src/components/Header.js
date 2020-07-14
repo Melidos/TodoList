@@ -9,7 +9,11 @@ export default class Header extends Component {
 		return (
 			<Grid container style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: 10 }}>
 				<Grid item>
-					<DrawerMenu userLogged={this.props.userLogged} exportToCSV={this.props.exportToCSV} />
+					<DrawerMenu
+						userLogged={this.props.userLogged}
+						exportToCSV={this.props.exportToCSV}
+						importCSV={this.props.importCSV}
+					/>
 				</Grid>
 				<Grid item xs>
 					<AddTodo addTodo={this.props.addTodo} />

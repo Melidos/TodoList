@@ -41,6 +41,27 @@ export default class App extends Component {
 		he.click();
 	};
 
+	importCSV = () => {
+		const he = document.createElement('input');
+		const fr = new FileReader();
+		fr.onload = (_) => {
+			const lines = fr.result.split('\n');
+			const el = lines.slice(1).map((e) => e.split(','));
+			el.forEach((element) => {
+				this.addTodo(element[0], element[1].slice(1, -1));
+			});
+		};
+		he.type = 'file';
+		he.accept = '.csv';
+		he.onchange = (_) => {
+			const file = he.files[0];
+			fr.readAsText(file);
+		};
+		he.click();
+
+		console.log(he.value);
+	};
+
 	markComplete = (id) => {
 		axios
 			.put('/api/todos/' + id)
@@ -73,9 +94,9 @@ export default class App extends Component {
 		}, 1000);
 	};
 
-	addTodo = (name) => {
+	addTodo = (completed, name) => {
 		axios
-			.post('/api/todos', { name, user: this.state.userLogged })
+			.post('/api/todos', { completed, name, user: this.state.userLogged })
 			.then((todo) =>
 				this.setState({
 					todos : [
@@ -90,7 +111,12 @@ export default class App extends Component {
 	render() {
 		return (
 			<Container>
-				<Header addTodo={this.addTodo} userLogged={this.state.userLogged} exportToCSV={this.exportToCSV} />
+				<Header
+					addTodo={this.addTodo}
+					userLogged={this.state.userLogged}
+					exportToCSV={this.exportToCSV}
+					importCSV={this.importCSV}
+				/>
 				<Todos todos={this.state.todos} markComplete={this.markComplete} removeTodo={this.removeTodo} />
 			</Container>
 		);

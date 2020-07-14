@@ -50,7 +50,7 @@ export default class DrawerMenu extends Component {
 						</form>
 						<ButtonGroup color='primary' fullWidth={true} style={{ marginTop: '10px' }}>
 							<Button onClick={this.props.exportToCSV}>Export</Button>
-							<Button onClick={(_) => null}>Import</Button>
+							<Button onClick={this.props.importCSV}>Import</Button>
 						</ButtonGroup>
 					</Container>
 				</Drawer>

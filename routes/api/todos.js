@@ -14,8 +14,9 @@ router.post('/getTodos', (req, res) => {
 // @desc    Create a new todo
 router.post('/', (req, res) => {
 	const newTodo = new Todo({
-		name : req.body.name,
-		user : req.body.user
+		name      : req.body.name,
+		user      : req.body.user,
+		completed : req.body.completed
 	});
 
 	newTodo

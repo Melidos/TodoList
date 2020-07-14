@@ -14,7 +14,7 @@ export default class AddTodo extends Component {
 				style={{ display: 'inline-block', width: '100%' }}
 				onSubmit={(e) => {
 					e.preventDefault();
-					this.props.addTodo(this.state.name);
+					this.props.addTodo(false, this.state.name);
 					this.setState({ name: '' });
 				}}
 			>
