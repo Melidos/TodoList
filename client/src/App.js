@@ -3,17 +3,23 @@ import './App.css';
 import Todos from './components/Todos.js';
 import Header from './components/Header.js';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
-import { Container } from '@material-ui/core';
+import { Container, ThemeProvider, createMuiTheme, Button } from '@material-ui/core';
 
 export default class App extends Component {
 	state = {
 		todos      : [],
-		userLogged : null
+		userLogged : null,
+		darkMode   :
+			document.cookie.split(';').find((row) => row.startsWith('darkMode')) === undefined
+				? false
+				: document.cookie.split(';').find((row) => row.startsWith('darkMode')).split('=')[1] === 'true'
+					? true
+					: false
 	};
 
 	componentDidMount() {
+		document.body.style.background = this.state.darkMode === true ? '#393939' : 'white';
 		axios.get('/api/login/isLoggedIn').then((user) => this.setState({ userLogged: user.data })).then((_) => {
 			if (this.state.userLogged) {
 				console.log(this.state.userLogged + ' connected');
@@ -28,6 +34,10 @@ export default class App extends Component {
 				console.log('User not connected');
 			}
 		});
+	}
+
+	componentDidUpdate() {
+		document.body.style.background = this.state.darkMode === true ? '#393939' : 'white';
 	}
 
 	exportToCSV = () => {
@@ -108,17 +118,40 @@ export default class App extends Component {
 			.catch((err) => console.log("Couldn't create new todo: " + err));
 	};
 
+	setDarkMode = () => {
+		document.cookie = 'darkMode=' + !this.state.darkMode;
+		console.log(document.cookie);
+		this.setState({ darkMode: !this.state.darkMode });
+	};
+
 	render() {
 		return (
-			<Container>
-				<Header
-					addTodo={this.addTodo}
-					userLogged={this.state.userLogged}
-					exportToCSV={this.exportToCSV}
-					importCSV={this.importCSV}
-				/>
-				<Todos todos={this.state.todos} markComplete={this.markComplete} removeTodo={this.removeTodo} />
-			</Container>
+			<ThemeProvider
+				theme={
+					this.state.darkMode === true ? (
+						createMuiTheme({ palette: { type: 'dark' } })
+					) : (
+						createMuiTheme({ palette: { type: 'light' } })
+					)
+				}
+			>
+				<Container>
+					<Header
+						addTodo={this.addTodo}
+						userLogged={this.state.userLogged}
+						exportToCSV={this.exportToCSV}
+						importCSV={this.importCSV}
+						darkMode={this.state.darkMode}
+						setDarkMode={this.setDarkMode}
+					/>
+					<Todos
+						todos={this.state.todos}
+						markComplete={this.markComplete}
+						removeTodo={this.removeTodo}
+						darkMode={this.state.darkMode}
+					/>
+				</Container>
+			</ThemeProvider>
 		);
 	}
 }

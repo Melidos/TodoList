@@ -5,12 +5,8 @@ import { TableRow, TableCell, Checkbox, Button, Fade } from '@material-ui/core';
 export default class TodoItem extends Component {
 	getStyle = () => {
 		return {
-			textDecoration :
-				this.props.todo.completed ? 'line-through' :
-				'none',
-			color          :
-				this.props.todo.completed ? 'grey' :
-				'black'
+			textDecoration : this.props.todo.completed ? 'line-through' : 'none',
+			color          : this.props.todo.completed ? 'grey' : this.props.darkMode === true ? 'white' : 'black'
 		};
 	};
 

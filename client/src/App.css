@@ -1,33 +1,11 @@
-/*
-.addForm {
-	@media (max-width: 1280px) {
-		position: fixed;
-		bottom: 5px;
-		width: 95%;
-		display: block;
-		background-color: white;
-		z-index: 10;
-		pointer-events: all;
-	}
-	@media (max-width: 1050px) {
-		width: 93.5%;
-	}
-	@media (max-width: 740px) {
-		width: 91%;
-	}
-	@media (max-width: 450px) {
-		width: 88%;
-	}
-	@media (max-width: 360px) {
-		width: 87%;
-	}
+body {
+  margin: 0;
+  padding: 8px;
 }
 
-table {
-	@media (max-width: 1280px) {
-		margin-bottom: 75px;
-	}
+svg,
+.MuiButton-label {
+  z-index: 1;
 }
-*/
 
 /*# sourceMappingURL=App.css.map */

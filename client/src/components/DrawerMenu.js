@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Drawer, Container, TextField, ButtonGroup, Fade } from '@material-ui/core';
+import { Button, Drawer, Container, TextField, ButtonGroup, Fade, Switch } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Axios from 'axios';
 
@@ -40,7 +40,7 @@ export default class DrawerMenu extends Component {
 							}}
 						>
 							<Button
-								variant='outlined'
+								variant={this.props.darkMode === true ? 'contained' : 'outlined'}
 								color='primary'
 								style={{ display: 'block', margin: '10px auto 0' }}
 								type='submit'
@@ -49,9 +49,21 @@ export default class DrawerMenu extends Component {
 							</Button>
 						</form>
 						<ButtonGroup color='primary' fullWidth={true} style={{ marginTop: '10px' }}>
-							<Button onClick={this.props.exportToCSV}>Export</Button>
-							<Button onClick={this.props.importCSV}>Import</Button>
+							<Button
+								variant={this.props.darkMode === true ? 'contained' : 'outlined'}
+								onClick={this.props.exportToCSV}
+							>
+								Export
+							</Button>
+							<Button
+								variant={this.props.darkMode === true ? 'contained' : 'outlined'}
+								onClick={this.props.importCSV}
+							>
+								Import
+							</Button>
 						</ButtonGroup>
+						<span>Dark Mode</span>
+						<Switch onChange={() => this.props.setDarkMode()} checked={this.props.darkMode} />
 					</Container>
 				</Drawer>
 			</React.Fragment>
@@ -115,10 +127,18 @@ export default class DrawerMenu extends Component {
 								}}
 							/>
 							<ButtonGroup color='primary' fullWidth={true} style={{ marginTop: '10px' }}>
-								<Button onClick={(_) => this.setState({ action: 'register' })} type='submit'>
+								<Button
+									variant={this.props.darkMode === true ? 'contained' : 'outlined'}
+									onClick={(_) => this.setState({ action: 'register' })}
+									type='submit'
+								>
 									Register
 								</Button>
-								<Button onClick={(_) => this.setState({ action: 'login' })} type='submit'>
+								<Button
+									variant={this.props.darkMode === true ? 'contained' : 'outlined'}
+									onClick={(_) => this.setState({ action: 'login' })}
+									type='submit'
+								>
 									Login
 								</Button>
 							</ButtonGroup>

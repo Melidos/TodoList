@@ -17,6 +17,7 @@ export default class Todos extends Component {
 								todo={todo}
 								markComplete={this.props.markComplete}
 								removeTodo={this.props.removeTodo}
+								darkMode={this.props.darkMode}
 							/>
 						))}
 				</TableBody>
