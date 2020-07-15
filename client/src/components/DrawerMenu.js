@@ -6,13 +6,14 @@ import Axios from 'axios';
 
 export default class DrawerMenu extends Component {
 	state = {
-		drawer            : false,
-		username          : '',
-		password          : '',
-		action            : '',
-		registration      : false,
-		registrationState : null,
-		userLogged        : null
+		drawer               : false,
+		username             : '',
+		password             : '',
+		action               : '',
+		registration         : false,
+		registrationState    : null,
+		userLogged           : null,
+		passwordVerification : false
 	};
 
 	componentDidMount() {
@@ -83,18 +84,24 @@ export default class DrawerMenu extends Component {
 						onSubmit={(e) => {
 							if (this.state.action === 'register') {
 								e.preventDefault();
-								Axios.post('/api/login/register', {
-									username : this.state.username,
-									password : this.state.password
-								})
-									.then((_) => {
-										this.setState({ registration: true, registrationState: 'success' });
-										setTimeout((_) => this.setState({ registration: false }), 3000);
+								if (this.state.passwordVerification === true) {
+									this.setState({ registration: true, registrationState: 'error' });
+									setTimeout((_) => this.setState({ registration: false }), 3000);
+								}
+								else {
+									Axios.post('/api/login/register', {
+										username : this.state.username,
+										password : this.state.password
 									})
-									.catch((err) => {
-										this.setState({ registration: true, registrationState: 'error' });
-										setTimeout((_) => this.setState({ registration: false }), 3000);
-									});
+										.then((_) => {
+											this.setState({ registration: true, registrationState: 'success' });
+											setTimeout((_) => this.setState({ registration: false }), 3000);
+										})
+										.catch((err) => {
+											this.setState({ registration: true, registrationState: 'error' });
+											setTimeout((_) => this.setState({ registration: false }), 3000);
+										});
+								}
 							}
 							else if (this.state.action === 'login') {
 								e.preventDefault();
@@ -122,7 +129,16 @@ export default class DrawerMenu extends Component {
 								type='password'
 								fullWidth={true}
 								name='password'
+								error={this.state.passwordVerification}
+								helperText={
+									this.state.passwordVerification === true ? 'Need at least 8 characters' : ''
+								}
 								onChange={(e) => {
+									console.log(e.target.value);
+									console.log(e.target.value.length);
+									e.target.value.length < 8
+										? this.setState({ passwordVerification: true })
+										: this.setState({ passwordVerification: false });
 									this.setState({ password: e.target.value });
 								}}
 							/>
