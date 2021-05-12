@@ -26,7 +26,7 @@ router.post("/login", (req, res) => {
             });
 
             res
-              .cookie("authToken", token, { httpOnly: true, sameSite: "none" })
+              .cookie("authToken", token, { sameSite: "none" })
               .status(200)
               .send(user);
           } else {
@@ -79,7 +79,6 @@ router.get("/disconnect", (req, res) => {
   res
     .cookie("authToken", "", {
       expires: new Date("1970-01-01"),
-      httpOnly: true,
       sameSite: "none",
     })
     .status(200)
