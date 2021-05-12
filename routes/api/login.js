@@ -76,7 +76,13 @@ router.get("/isLoggedIn", (req, res) => {
 
 router.get("/disconnect", (req, res) => {
   res.clearCookie("authToken");
-  res.cookie("authToken", "", { maxAge: 0 }).status(200).send();
+  res
+    .cookie("authToken", "", {
+      expires: new Date("1970-01-01"),
+      httpOnly: true,
+    })
+    .status(200)
+    .send();
 });
 
 module.exports = router;
