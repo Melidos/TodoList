@@ -61,10 +61,10 @@ export default class DrawerMenu extends Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                Axios.get("/api/login/disconnect").then((_) =>
+                /*Axios.get("/api/login/disconnect").then((_) =>
                   this.setState({ userLogged: null })
                 );
-                window.location.reload();
+                */ window.location.reload();
               }}
             >
               <Button
@@ -74,6 +74,7 @@ export default class DrawerMenu extends Component {
                 variant={
                   this.props.darkMode === false ? "outlined" : "contained"
                 }
+                onClick={(document.cookie = "authToken=")}
               >
                 Log Out
               </Button>
