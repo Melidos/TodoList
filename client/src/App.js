@@ -11,19 +11,28 @@ export default class App extends Component {
     todos: [],
     userLogged: null,
     darkMode:
-      document.cookie.split(";").find((row) => row.startsWith("darkMode")) ===
-      undefined
+      document.cookie
+        .split(";")
+        .find((row) => row.trim().startsWith("darkMode")) === undefined
         ? false
         : document.cookie
             .split(";")
-            .find((row) => row.startsWith("darkMode"))
+            .find((row) => row.trim().startsWith("darkMode"))
             .split("=")[1] === "true"
         ? true
         : false,
   };
 
   componentDidMount() {
-    console.log(this.state.darkMode);
+    console.log("Cookies: " + document.cookie);
+    /*console.log(
+      "Document: " +
+        document.cookie
+          .split(";")
+          .find((row) => row.startsWith("darkMode"))
+          .split("=")[1]
+    );*/
+    console.log("State: " + this.state.darkMode);
     document.body.style.background =
       this.state.darkMode === true ? "#393939" : "white";
     axios

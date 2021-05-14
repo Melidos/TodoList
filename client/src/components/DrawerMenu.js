@@ -61,7 +61,10 @@ export default class DrawerMenu extends Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                document.cookie = "authToken=;expires=01/01/1970";
+                document.cookie =
+                  "darkMode=" +
+                  this.props.darkMode +
+                  ";authToken=;expires=01/01/1970";
                 Axios.get("/api/login/disconnect").then((_) =>
                   this.setState({ userLogged: null })
                 );
@@ -176,7 +179,9 @@ export default class DrawerMenu extends Component {
                   mail: this.state.mail,
                   password: this.state.password,
                 })
-                  .then((_) => window.location.reload())
+                  .then((_) => {
+                    window.location.reload();
+                  })
                   .catch((err) => console.error("Connection error: " + err));
               }
             }}
