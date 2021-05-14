@@ -23,6 +23,7 @@ export default class DrawerMenu extends Component {
     userLogged: null,
     passwordVerification: false,
     mailVerification: false,
+    registrationError: "",
   };
 
   componentDidMount() {
@@ -133,12 +134,13 @@ export default class DrawerMenu extends Component {
               if (this.state.action === "register") {
                 e.preventDefault();
                 if (
-                  this.state.passwordVerification === true &&
+                  this.state.passwordVerification === true ||
                   this.state.mailVerification === true
                 ) {
                   this.setState({
                     registration: true,
                     registrationState: "error",
+                    registrationError: "Password or mail is invalide",
                   });
                   setTimeout(
                     (_) => this.setState({ registration: false }),
@@ -163,6 +165,7 @@ export default class DrawerMenu extends Component {
                       this.setState({
                         registration: true,
                         registrationState: "error",
+                        registrationError: "Mail already in use",
                       });
                       setTimeout(
                         (_) => this.setState({ registration: false }),
@@ -179,7 +182,17 @@ export default class DrawerMenu extends Component {
                   .then((_) => {
                     window.location.reload();
                   })
-                  .catch((err) => console.error("Connection error: " + err));
+                  .catch((err) => {
+                    this.setState({
+                      registration: true,
+                      registrationState: "login",
+                      registrationError: "Mail or password incorrect",
+                    });
+                    setTimeout(
+                      (_) => this.setState({ registration: false }),
+                      3000
+                    );
+                  });
               }
             }}
           >
@@ -254,14 +267,17 @@ export default class DrawerMenu extends Component {
               <Fade in={this.state.registration}>
                 <Alert
                   severity={
-                    this.state.registrationState === null
+                    this.state.registrationState === null ||
+                    this.state.registrationState === "login"
                       ? "error"
                       : this.state.registrationState
                   }
                 >
                   {this.state.registrationState === "success"
                     ? "Registration complete"
-                    : "Registration failed"}
+                    : this.state.registrationState === "error"
+                    ? "Registration failed: " + this.state.registrationError
+                    : "Login failed: " + this.state.registrationError}
                 </Alert>
               </Fade>
             </Container>
@@ -275,3 +291,6 @@ export default class DrawerMenu extends Component {
     return this.state.userLogged ? this.renderLogged() : this.renderNotLogged();
   }
 }
+
+//TODO: Adress doesn't exist
+//TODO: Wrong password
