@@ -24,15 +24,6 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    console.log("Cookies: " + document.cookie);
-    /*console.log(
-      "Document: " +
-        document.cookie
-          .split(";")
-          .find((row) => row.startsWith("darkMode"))
-          .split("=")[1]
-    );*/
-    console.log("State: " + this.state.darkMode);
     document.body.style.background =
       this.state.darkMode === true ? "#393939" : "white";
     axios
