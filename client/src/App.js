@@ -23,6 +23,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    console.log(this.state.darkMode);
     document.body.style.background =
       this.state.darkMode === true ? "#393939" : "white";
     axios

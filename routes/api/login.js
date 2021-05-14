@@ -75,10 +75,9 @@ router.get("/isLoggedIn", (req, res) => {
 });
 
 router.get("/disconnect", (req, res) => {
-  res.clearCookie("authToken");
   res
     .cookie("authToken", "", {
-      expires: new Date("1970-01-01"),
+      expires: new Date(Date.now()),
       sameSite: "none",
     })
     .status(200)
